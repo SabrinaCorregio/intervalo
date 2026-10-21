@@ -87,6 +87,7 @@ const PHASE_COLORS = {
 const SOUND_SOURCES = {
   tick: require("./assets/sounds/tick.wav"),
   start: require("./assets/sounds/start.wav"),
+  bell: require("./assets/sounds/bell.wav"),
   rest: require("./assets/sounds/rest.wav"),
   end: require("./assets/sounds/end.wav"),
   silence: require("./assets/sounds/silence.wav"),
@@ -505,9 +506,8 @@ function Run({ preset, settings, onClose }) {
     const sg = segs[index];
     const c = cfg.current;
     if (sg.phase === "work") {
-      const lastRound = sg.round === preset.rounds && sg.set === preset.sets;
-      playSound("start", c.sound);
-      speak(lastRound && preset.rounds > 1 ? "Última rodada. Vai!" : preset.rounds > 1 ? `Rodada ${sg.round}` : "Vai!", c.voice);
+      // Início de round: sino de boxe (sem voz)
+      playSound("bell", c.sound);
       vibrate("start", c.vibrate);
     } else {
       playSound("rest", c.sound);
